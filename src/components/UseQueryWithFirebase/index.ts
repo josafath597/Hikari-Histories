@@ -1,0 +1,1 @@
+export { CardAnime } from "./CardAnime";
