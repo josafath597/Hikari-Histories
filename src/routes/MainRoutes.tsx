@@ -6,7 +6,7 @@ import Loadable from "../ui-component/Loadable";
 const AnimeList = Loadable(
   lazy(() => import('./../views/AnimeList'))
 );
-const AnimeViewPage = Loadable(lazy(() => import('./../views/AnimeViewPage')));
+const AnimeViewPage = Loadable(lazy(() => import('../views/AnimeViewPage/AnimeViewPage')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -17,13 +17,13 @@ const MainRoutes = {
       element: <AnimeList />,
     },
     {
-      path: "*",
-      element: <Navigate to="/" />,
-    },
-    {
       path: 'Anime/:id',
       element: <AnimeViewPage />
     },
+    {
+      path: "*",
+      element: <Navigate to="/" />,
+    }
   ],
 };
 

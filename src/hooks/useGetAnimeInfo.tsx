@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import axiosServices from "../Api/Axios";
 import { AnimeInfo } from "../interfaces/AnimeInfo";
+import { useState, useEffect } from 'react';
+
 
 interface Props {
     id: string;
@@ -21,5 +23,16 @@ export const useGetAnimeInfo = ({ id } : Props) => {
         refetchOnWindowFocus: false,
         staleTime: Infinity,
     });
-    return { animeQueryInfo };
+
+    const [embedUrl, setEmbedUrl] = useState<string>("");
+
+    useEffect(() => {
+        if (animeQueryInfo.data?.trailer.embed_url) {
+            let url = new URL(animeQueryInfo.data?.trailer.embed_url);
+            url.searchParams.set("autoplay", "0");
+            setEmbedUrl(url.toString());
+        }
+    }, [animeQueryInfo.data?.trailer.embed_url]);
+
+    return { animeQueryInfo, embedUrl };
 };

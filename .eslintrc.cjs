@@ -19,6 +19,8 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react"],
-  rules: {},
+  plugins: ["react", "react-refresh"],
+  rules: {
+    "react-refresh/only-export-components": "warn"
+  },
 };
