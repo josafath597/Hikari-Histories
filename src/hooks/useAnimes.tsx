@@ -7,6 +7,7 @@ interface Props {
     page?: number;
     type?: string;
     filter?: string;
+    rating?: string;
 }
 
 interface QueryProps {
@@ -16,15 +17,14 @@ interface QueryProps {
 
 const fetchMoreAnime = async ({ pageParam = 1, queryKey }: QueryProps) => {
     try {
-        console.log('Hola me ejecute');
         if (!Array.isArray(queryKey)) throw new Error('queryKey must be an array');
         const [,,args] = queryKey
         const { filter, type } = args as Props;
         const params = new URLSearchParams();
         if ( filter ) params.append('filter', filter );
         if ( type ) params.append('type', type );
-        params.append('rating', 'pg13');
-        params.append('sfw', 'true');
+        params.append('rating', 'g' )
+        params.append('sfw', 'false');
         params.append('limit', '24');
         params.append('page', pageParam.toString() );
         const { data } = await axiosServices.get<Anime>(`/top/anime`, { params });

@@ -4,7 +4,10 @@ import Loadable from "../ui-component/Loadable";
 
 // sample page routing
 const AnimeList = Loadable(
-  lazy(() => import('./../views/AnimeList'))
+  lazy(() => import('../views/AnimeList/AnimeList'))
+);
+const MangaList = Loadable(
+  lazy(() => import('../views/MangaList/MangaList'))
 );
 const AnimeViewPage = Loadable(lazy(() => import('../views/AnimeViewPage/AnimeViewPage')));
 // ==============================|| MAIN ROUTING ||============================== //
@@ -14,15 +17,23 @@ const MainRoutes = {
   children: [
     {
       path: "/",
+      element: <Navigate to="/anime" />,
+    },
+    {
+      path: "anime",
       element: <AnimeList />,
     },
     {
-      path: 'Anime/:id',
+      path: 'anime/:id',
       element: <AnimeViewPage />
     },
     {
+      path: "manga",
+      element: <MangaList />
+    },
+    {
       path: "*",
-      element: <Navigate to="/" />,
+      element: <Navigate to="/anime" />,
     }
   ],
 };
